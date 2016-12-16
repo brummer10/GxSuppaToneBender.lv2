@@ -35,13 +35,13 @@
 #endif
 
 
-#define GTK_KNOB_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), GTK_TYPE_KNOB, GtkKnobPrivate))
+#define GTK_TBENDER_KNOB_GET_PRIVATE(obj) (G_TYPE_INSTANCE_GET_PRIVATE((obj), GTK_TYPE_TBENDER_KNOB, GtkTBenderKnobPrivate))
 
-G_DEFINE_TYPE(GtkKnob, gtk_knob, GTK_TYPE_RANGE);
+G_DEFINE_TYPE(GtkTBenderKnob, gtk_knob, GTK_TYPE_RANGE);
 
-typedef struct _GtkKnobPrivate GtkKnobPrivate;
+typedef struct _GtkTBenderKnobPrivate GtkTBenderKnobPrivate;
 
-struct _GtkKnobPrivate
+struct _GtkTBenderKnobPrivate
 {
 	int knob_x;
 	int knob_y;
@@ -89,7 +89,7 @@ static void knob_expose(GtkWidget *widget, int knob_x, int knob_y, GdkEventExpos
 {
 	/** check resize **/
 	int grow;
- 	GtkKnobPrivate *priv = GTK_KNOB_GET_PRIVATE(widget);
+ 	GtkTBenderKnobPrivate *priv = GTK_TBENDER_KNOB_GET_PRIVATE(widget);
     GtkAllocation *allocation = g_new0 (GtkAllocation, 1);
     gtk_widget_get_allocation(GTK_WIDGET(widget), allocation); 
 	if(allocation->width > allocation->height) {
@@ -210,9 +210,9 @@ static void knob_expose(GtkWidget *widget, int knob_x, int knob_y, GdkEventExpos
 //----------- draw the Knob when moved
 static gboolean gtk_knob_expose (GtkWidget *widget, GdkEventExpose *event)
 {
-	g_assert(GTK_IS_KNOB(widget));
-	GtkKnob *knob = GTK_KNOB(widget);
-	GtkKnobPrivate *priv = GTK_KNOB_GET_PRIVATE(knob);
+	g_assert(GTK_IS_TBENDER_KNOB(widget));
+	GtkTBenderKnob *knob = GTK_TBENDER_KNOB(widget);
+	GtkTBenderKnobPrivate *priv = GTK_TBENDER_KNOB_GET_PRIVATE(knob);
 	knob_expose(widget, priv->knob_x, priv->knob_y, event, 0);
 	return TRUE;
 }
@@ -223,9 +223,9 @@ static gboolean gtk_knob_expose (GtkWidget *widget, GdkEventExpose *event)
 
 static void gtk_knob_size_request (GtkWidget *widget, GtkRequisition *requisition)
 {
-	g_assert(GTK_IS_KNOB(widget));
-	GtkKnob *knob = GTK_KNOB(widget);
-	GtkKnobPrivate *priv = GTK_KNOB_GET_PRIVATE(knob);
+	g_assert(GTK_IS_TBENDER_KNOB(widget));
+	GtkTBenderKnob *knob = GTK_TBENDER_KNOB(widget);
+	GtkTBenderKnobPrivate *priv = GTK_TBENDER_KNOB_GET_PRIVATE(knob);
 	requisition->width = priv->knob_x;
 	requisition->height = priv->knob_y;
 }
@@ -236,7 +236,7 @@ static void gtk_knob_size_request (GtkWidget *widget, GtkRequisition *requisitio
 
 static void gtk_knob_set_value (GtkWidget *widget, int dir_down)
 {
-	g_assert(GTK_IS_KNOB(widget));
+	g_assert(GTK_IS_TBENDER_KNOB(widget));
 
 	GtkAdjustment *adj = gtk_range_get_adjustment(GTK_RANGE(widget));
 
@@ -258,7 +258,7 @@ static void gtk_knob_set_value (GtkWidget *widget, int dir_down)
 
 static gboolean gtk_knob_key_press (GtkWidget *widget, GdkEventKey *event)
 {
-	g_assert(GTK_IS_KNOB(widget));
+	g_assert(GTK_IS_TBENDER_KNOB(widget));
 
 	GtkAdjustment *adj = gtk_range_get_adjustment(GTK_RANGE(widget));
 	switch (event->keyval) {
@@ -294,8 +294,8 @@ static void knob_pointer_event(GtkWidget *widget, gdouble x, gdouble y, int knob
                                gboolean drag, int state)
 {
 	static double last_y = 2e20;
-	GtkKnob *knob = GTK_KNOB(widget);
-	GtkKnobPrivate *priv = GTK_KNOB_GET_PRIVATE(knob);
+	GtkTBenderKnob *knob = GTK_TBENDER_KNOB(widget);
+	GtkTBenderKnobPrivate *priv = GTK_TBENDER_KNOB_GET_PRIVATE(knob);
 	GtkAdjustment *adj = gtk_range_get_adjustment(GTK_RANGE(widget));
     GtkAllocation *allocation = g_new0 (GtkAllocation, 1);
     gtk_widget_get_allocation(GTK_WIDGET(widget), allocation); 
@@ -357,9 +357,9 @@ static void knob_pointer_event(GtkWidget *widget, gdouble x, gdouble y, int knob
 
 static gboolean gtk_knob_button_press (GtkWidget *widget, GdkEventButton *event)
 {
-	g_assert(GTK_IS_KNOB(widget));
-	GtkKnob *knob = GTK_KNOB(widget);
-	GtkKnobPrivate *priv = GTK_KNOB_GET_PRIVATE(knob);
+	g_assert(GTK_IS_TBENDER_KNOB(widget));
+	GtkTBenderKnob *knob = GTK_TBENDER_KNOB(widget);
+	GtkTBenderKnobPrivate *priv = GTK_TBENDER_KNOB_GET_PRIVATE(knob);
 	
 	switch (event->button) {
 	case 1:  // left button
@@ -388,9 +388,9 @@ static gboolean gtk_knob_button_press (GtkWidget *widget, GdkEventButton *event)
 
 static gboolean gtk_knob_button_release (GtkWidget *widget, GdkEventButton *event)
 {
-	g_assert(GTK_IS_KNOB(widget));
-	GtkKnob *knob = GTK_KNOB(widget);
-	GtkKnobPrivate *priv = GTK_KNOB_GET_PRIVATE(knob);
+	g_assert(GTK_IS_TBENDER_KNOB(widget));
+	GtkTBenderKnob *knob = GTK_TBENDER_KNOB(widget);
+	GtkTBenderKnobPrivate *priv = GTK_TBENDER_KNOB_GET_PRIVATE(knob);
 	priv->button_is = 0;
 	if (gtk_widget_has_grab(widget))
 		gtk_grab_remove(widget);
@@ -403,9 +403,9 @@ static gboolean gtk_knob_button_release (GtkWidget *widget, GdkEventButton *even
 
 static gboolean gtk_knob_pointer_motion (GtkWidget *widget, GdkEventMotion *event)
 {
-	g_assert(GTK_IS_KNOB(widget));
-	GtkKnob *knob = GTK_KNOB(widget);
-	GtkKnobPrivate *priv = GTK_KNOB_GET_PRIVATE(knob);
+	g_assert(GTK_IS_TBENDER_KNOB(widget));
+	GtkTBenderKnob *knob = GTK_TBENDER_KNOB(widget);
+	GtkTBenderKnobPrivate *priv = GTK_TBENDER_KNOB_GET_PRIVATE(knob);
 	gdk_event_request_motions (event);
 	
 	if (gtk_widget_has_grab(widget)) {
@@ -431,8 +431,8 @@ static gboolean gtk_knob_scroll (GtkWidget *widget, GdkEventScroll *event)
 
 static gboolean gtk_knob_enter_in (GtkWidget *widget, GdkEventCrossing *event)
 {
-	GtkKnob *knob = GTK_KNOB(widget);
-	GtkKnobPrivate *priv = GTK_KNOB_GET_PRIVATE(knob);
+	GtkTBenderKnob *knob = GTK_TBENDER_KNOB(widget);
+	GtkTBenderKnobPrivate *priv = GTK_TBENDER_KNOB_GET_PRIVATE(knob);
 	priv->show_value = 1;
 	gtk_widget_queue_draw(widget);
 	return FALSE;
@@ -445,18 +445,18 @@ static gboolean gtk_knob_enter_in (GtkWidget *widget, GdkEventCrossing *event)
 
 static gboolean gtk_knob_leave_out (GtkWidget *widget, GdkEventCrossing *event)
 {
-	GtkKnob *knob = GTK_KNOB(widget);
-	GtkKnobPrivate *priv = GTK_KNOB_GET_PRIVATE(knob);
+	GtkTBenderKnob *knob = GTK_TBENDER_KNOB(widget);
+	GtkTBenderKnobPrivate *priv = GTK_TBENDER_KNOB_GET_PRIVATE(knob);
 	priv->show_value = 0;
 	gtk_widget_queue_draw(widget);
 	return FALSE;
 	
 }
 /****************************************************************
- ** init the GtkKnobClass
+ ** init the GtkTBenderKnobClass
  */
 
-static void gtk_knob_class_init (GtkKnobClass *klass)
+static void gtk_knob_class_init (GtkTBenderKnobClass *klass)
 {
 	GObjectClass *obj_class = G_OBJECT_CLASS (klass);
 
@@ -473,17 +473,17 @@ static void gtk_knob_class_init (GtkKnobClass *klass)
 	widget_class->key_press_event = gtk_knob_key_press;
 	widget_class->scroll_event = gtk_knob_scroll;
 	
-	g_type_class_add_private(obj_class, sizeof (GtkKnobPrivate));
+	g_type_class_add_private(obj_class, sizeof (GtkTBenderKnobPrivate));
 }
 
 /****************************************************************
  ** init the Knob type/size
  */
 
-static void gtk_knob_init (GtkKnob *knob)
+static void gtk_knob_init (GtkTBenderKnob *knob)
 {
 	GtkWidget *widget = GTK_WIDGET(knob);
-	GtkKnobPrivate *priv = GTK_KNOB_GET_PRIVATE(knob);
+	GtkTBenderKnobPrivate *priv = GTK_TBENDER_KNOB_GET_PRIVATE(knob);
 	priv->knob_x = 62;
 	priv->knob_y = 62;
 	priv->knob_step = 86;
@@ -517,9 +517,9 @@ static gboolean gtk_knob_value_changed(gpointer obj)
 
 GtkWidget *gtk_knob_new_with_adjustment(GtkAdjustment *_adjustment)
 {
-	GtkWidget *widget = GTK_WIDGET( g_object_new (GTK_TYPE_KNOB, NULL ));
+	GtkWidget *widget = GTK_WIDGET( g_object_new (GTK_TYPE_TBENDER_KNOB, NULL ));
  
-	GtkKnobPrivate *priv = GTK_KNOB_GET_PRIVATE(widget);
+	GtkTBenderKnobPrivate *priv = GTK_TBENDER_KNOB_GET_PRIVATE(widget);
 	priv->model = 0;
 
 	if (widget) {
@@ -532,9 +532,9 @@ GtkWidget *gtk_knob_new_with_adjustment(GtkAdjustment *_adjustment)
 
 GtkWidget *gtk_switch_new_with_adjustment(GtkAdjustment *_adjustment)
 {
-	GtkWidget *widget = GTK_WIDGET( g_object_new (GTK_TYPE_KNOB, NULL ));
+	GtkWidget *widget = GTK_WIDGET( g_object_new (GTK_TYPE_TBENDER_KNOB, NULL ));
  
-	GtkKnobPrivate *priv = GTK_KNOB_GET_PRIVATE(widget);
+	GtkTBenderKnobPrivate *priv = GTK_TBENDER_KNOB_GET_PRIVATE(widget);
 	priv->model = 1;
 
 	if (widget) {

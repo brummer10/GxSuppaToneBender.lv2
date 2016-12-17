@@ -81,7 +81,7 @@ clean :
 
 install : all
 	@mkdir -p $(DESTDIR)$(INSTALL_DIR)/$(BUNDLE)
-	cd ./$(BUNDLE)/* $(DESTDIR)$(INSTALL_DIR)/$(BUNDLE)
+	cp ./$(BUNDLE)/* $(DESTDIR)$(INSTALL_DIR)/$(BUNDLE)
 	@echo ". ." $(BLUE)", done"$(NONE)
 
 uninstall :

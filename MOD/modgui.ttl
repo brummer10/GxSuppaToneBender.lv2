@@ -13,7 +13,7 @@
         modgui:model "boxy" ;
         modgui:panel "4-knobs" ;
         modgui:color "stb" ;
-        modgui:knob "silver" ;
+        modgui:knob "cairo" ;
         modgui:port [
             lv2:index 0 ;
             lv2:symbol "FUZZ" ;

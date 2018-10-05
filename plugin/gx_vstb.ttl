@@ -47,7 +47,7 @@
     lv2:project <http://guitarix.sourceforge.net/plugins/gx_vstb_> ;
     lv2:optionalFeature lv2:hardRTCapable ;
       
-    lv2:minorVersion 34;
+    lv2:minorVersion 35;
     lv2:microVersion 0;
 
   guiext:ui <http://guitarix.sourceforge.net/plugins/gx_vstb_gui#_vstb_>;
@@ -70,8 +70,7 @@ rdfs:comment """
         lv2:index 1 ;
         lv2:symbol "in" ;
         lv2:name "In" ;
-    ] 
-      , [
+    ] , [
         a lv2:InputPort ,
             lv2:ControlPort ;
         lv2:index 2 ;
@@ -101,7 +100,8 @@ rdfs:comment """
     ] .
 
 <http://guitarix.sourceforge.net/plugins/gx_vstb_gui#_vstb_>
-  a guiext:GtkUI;
+  a guiext:X11UI;
   guiext:binary <gx_vstb_ui.so>;
-  guiext:requiredFeature guiext:makeResident;
+        lv2:extensionData guiext::idle ; 
+        lv2:requiredFeature guiext:makeResident;
   .

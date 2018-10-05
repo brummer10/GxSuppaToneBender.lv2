@@ -8,8 +8,9 @@ Analog simulation of the Vox (*) Suppa Tone Bender pedal as LV2 plugin.
 the following packages are needed to build GxSuppaToneBender:
 
 - libc6-dev
-- libgtk2.0-dev
-- libstdc++6-dev
+- libcairo2-dev
+- libx11-dev
+- x11proto-dev
 - lv2-dev
 
 note that those packages could have different, but similar names 
